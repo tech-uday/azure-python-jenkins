@@ -35,14 +35,14 @@ def create_vm(subscription_id, resource_group_name, vm_name, location, username,
 
     # Create virtual network
     vnet_params = {
-        'address_space': {'address_prefixes': ['10.0.0.0/16']},
+        'address_space': {'address_prefixes': ['20.0.0.0/16']},
         'location': location
     }
     vnet = network_client.virtual_networks.create_or_update(resource_group_name, vnet_name, vnet_params)
 
     # Create subnet
     subnet_params = {
-        'address_prefix': '10.0.0.0/24'
+        'address_prefix': '20.0.0.0/24'
     }
     subnet = network_client.subnets.create_or_update(resource_group_name, vnet_name, subnet_name, subnet_params)
 
