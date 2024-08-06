@@ -37,7 +37,7 @@ def create_vm(subscription_id, resource_group_name, vm_name, location, username,
             'subnet': {'id': subnet.id}
         }]
     }
-    nic = network_client.network_interfaces.create_or_update(resource_group_name, 'myNic', nic_params)
+    nic = network_client.network_interfaces.begin_create_or_update(resource_group_name, 'myNic', nic_params)
 
     # Create virtual machine
     vm_params = {
