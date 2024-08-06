@@ -38,20 +38,20 @@ def create_vm(subscription_id, resource_group_name, vm_name, location, username,
         'address_space': {'address_prefixes': ['20.0.0.0/16']},
         'location': location
     }
-    vnet = network_client.virtual_networks.create_or_update(resource_group_name, vnet_name, vnet_params)
+    vnet = network_client.virtual_networks.begin_create_or_update(resource_group_name, vnet_name, vnet_params)
 
     # Create subnet
     subnet_params = {
         'address_prefix': '20.0.0.0/24'
     }
-    subnet = network_client.subnets.create_or_update(resource_group_name, vnet_name, subnet_name, subnet_params)
+    subnet = network_client.subnets.begin_create_or_update(resource_group_name, vnet_name, subnet_name, subnet_params)
 
     # Create public IP
     public_ip_params = {
         'location': location,
         'public_ip_allocation_method': 'Static'
     }
-    public_ip = network_client.public_ip_addresses.create_or_update(resource_group_name, public_ip_name, public_ip_params)
+    public_ip = network_client.public_ip_addresses.begin_create_or_update(resource_group_name, public_ip_name, public_ip_params)
 
     # Create network interface
     nic_params = {
@@ -61,7 +61,7 @@ def create_vm(subscription_id, resource_group_name, vm_name, location, username,
             'public_ip_address': {'id': public_ip.id}
         }]
     }
-    nic = network_client.network_interfaces.create_or_update(resource_group_name, 'myNic', nic_params)
+    nic = network_client.network_interfaces.begin_create_or_update(resource_group_name, 'myNic', nic_params)
 
     # Create virtual machine
     vm_params = {
